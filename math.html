@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+        }
+        #output {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fibonacci Sequence Calculator</h1>
+    <p>Calculating Fibonacci numbers dynamically. Results will appear below:</p>
+    <div id="output"></div>
+
+    <script>
+        // Function to calculate Fibonacci sequence using strings
+        function calculateFibonacci(n, startA, startB) {
+            let a = startA || "0"; // First Fibonacci number as a string
+            let b = startB || "1"; // Second Fibonacci number as a string
+            let result = [];
+
+            result.push(a); // Add the first number
+            if (n > 1) result.push(b); // Add the second number if n > 1
+
+            for (let i = 2; i < n; i++) {
+                let sum = (BigInt(a) + BigInt(b)).toString(); // Add using BigInt and convert back to string
+                result.push(sum); // Add the result to the array
+                a = b; // Update a
+                b = sum; // Update b
+            }
+
+            return { sequence: result, nextA: a, nextB: b };
+        }
+
+        const outputDiv = document.getElementById('output');
+        let currentN = 10; // Start with 10 Fibonacci numbers
+        let currentA = "0";
+        let currentB = "1";
+
+        function updateFibonacci() {
+            const { sequence, nextA, nextB } = calculateFibonacci(currentN + 3000, currentA, currentB);
+            outputDiv.textContent = sequence.join("\n"); // Display the sequence in the HTML
+            currentN += 3000; // Increment N by 3000
+            currentA = nextA; // Update the starting values for the next calculation
+            currentB = nextB;
+        }
+
+        setInterval(updateFibonacci, 1000); // Update every second
+    </script>
+</body>
+</html>
