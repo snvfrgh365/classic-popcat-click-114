@@ -12,6 +12,8 @@
         #output {
             white-space: pre-wrap;
             font-family: monospace;
+            height: 80vh; /* Set a height to enable scrolling */
+            overflow-y: auto; /* Add vertical scrolling */
         }
     </style>
 </head>
@@ -51,6 +53,9 @@
             currentN += 3000; // Increment N by 3000
             currentA = nextA; // Update the starting values for the next calculation
             currentB = nextB;
+
+            // Scroll to the bottom of the output div
+            outputDiv.scrollTop = outputDiv.scrollHeight;
         }
 
         setInterval(updateFibonacci, 1000); // Update every second
