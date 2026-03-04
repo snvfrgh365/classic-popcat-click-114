@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POPCAT CLASSIC</title>
+    <style>
+        /* 1. Basic Settings */
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            background-color: #bdaa90;
+            user-select: none;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 2. Title Image */
+        .title {
+            margin-top: 2em;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        /* 3. Cat Image */
+        .cat-img {
+            flex: 1;
+            width: 100%;
+            max-width: 800px;
+            background-position: bottom;
+            background-size: contain;
+            background-repeat: no-repeat;
+            text-align: center;
+            color: white;
+            font-size: 80px;
+            font-weight: 900;
+            -webkit-text-stroke: 3px black;
+        }
+
+        /* 4. Cat States */
+        #p {
+            background-image: url("imgs/p.png");
+        }
+        #op {
+            background-image: url("imgs/op.png");
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="title" src="imgs/popcat.svg" alt="POPCAT">
+        <div class="cat-img" id="p">0</div>
+    </div>
+    
+    <script>
+        // JavaScript to handle click functionality and toggle cat mouth
+        const catImg = document.getElementById('p');
+        let clickCount = 0;
+        const popSound = new Audio('sounds/pop.mp3'); // Ensure the sound file is in the correct path
+
+        catImg.addEventListener('mousedown', () => {
+            catImg.id = 'op'; // Open mouth
+            popSound.currentTime = 0; // Reset sound to start
+            popSound.play(); // Play sound
+        });
+
+        catImg.addEventListener('mouseup', () => {
+            catImg.id = 'p'; // Close mouth
+            clickCount++;
+            catImg.textContent = clickCount;
+        });
+    </script>
+</body>
+</html>
